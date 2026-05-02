@@ -19,9 +19,15 @@ app.add_middleware(
 # 🔧 TOOL
 def get_crypto_price(coin):
     try:
-        url = f"https://api.coingecko.com/api/v3/simple/price?ids={coin}&vs_currencies=usd"
+        url = f"https://api.coingecko.com/api/v3/simple/price?ids={coin}&vs_currencies=usd&include_market_cap=true&include_24hr_vol=true&include_24hr_change=true"
         response = requests.get(url, timeout=5).json()
-        return response.get(coin, {}).get("usd", None)
+        coin_data = response.get(coin, {})
+        
+        return {
+            "price": coin_data.get("usd"),
+            "change_24h": coin_data.get("usd_24h_change"),
+            "market_cap": coin_data.get("usd_market_cap")
+        }
     except:
         return None
 
@@ -31,10 +37,17 @@ def crypto_agent(user_input):
 
     for coin in coins:
         if coin in user_input.lower():
-            price = get_crypto_price(coin)
+            data = get_crypto_price(coin)
 
-            if price:
-                return f"💰 The current price of {coin} is ${price}. This data is fetched from an external API."
+            if data and data["price"]:
+                price = data["price"]
+                change_24h = data.get("change_24h", 0)
+                
+                # Determine trend emoji
+                trend_emoji = "📈" if change_24h >= 0 else "📉"
+                change_text = f"{change_24h:+.2f}%" if change_24h is not None else "N/A"
+                
+                return f"💰 {coin.capitalize()}: ${price:,.2f}\n{trend_emoji} 24h Change: {change_text}\nℹ️ Data from CoinGecko API"
 
             return "⚠️ Could not fetch price."
 

@@ -4,7 +4,7 @@
 
 An AI-powered crypto price agent built with **FastAPI**, following an **MCP-style tool-agent architecture**. The agent receives natural language queries, invokes an external tool (CoinGecko API) to fetch live cryptocurrency data, and returns intelligent responses in real time.
 
-🔗 **Live Demo:** `https://crypto-agent-843080848499.asia-south1.run.app/?query=ethereumprice`
+🔗 **Live Demo:** `https://crypto-agent-843080848499.asia-south1.run.app/`
 
 ---
 
@@ -102,7 +102,7 @@ crypto-agent/
 ## 🔮 Future Improvements
 
 - [ ] Support for 100+ coins via dynamic CoinGecko lookup
-- [ ] Add price trend & 24h change to responses
+- [x] Add price trend & 24h change to responses
 - [ ] Natural language processing for richer query understanding
 - [ ] Multi-coin portfolio queries
 - [ ] WebSocket support for real-time price streaming
