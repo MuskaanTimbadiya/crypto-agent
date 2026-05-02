@@ -38,15 +38,20 @@ User Query → Agent (decision unit) → Tool (CoinGecko API) → Response
 ---
 
 ## 🚀 Try It Live
+
+### Web UI
+Simply visit the live demo or run locally to access the interactive chat interface.
+
+### API Endpoint
 ```bash
 # Ask about Bitcoin
-curl "https://crypto-agent-843080848499.asia-south1.run.app/?query=bitcoin"
+curl "https://crypto-agent-843080848499.asia-south1.run.app/api/chat?query=bitcoin"
 
 # Ask about Ethereum
-curl "https://crypto-agent-843080848499.asia-south1.run.app/?query=ethereumprice"
+curl "https://crypto-agent-843080848499.asia-south1.run.app/api/chat?query=ethereum"
 
 # Ask about Dogecoin
-curl "https://crypto-agent-843080848499.asia-south1.run.app/?query=dogecoin"
+curl "https://crypto-agent-843080848499.asia-south1.run.app/api/chat?query=dogecoin"
 ```
 
 **Sample Response:**
@@ -71,13 +76,14 @@ cd crypto-agent
 pip install -r requirements.txt
 uvicorn main:app --reload
 ```
-Visit: `http://localhost:8000/?query=bitcoin price`
+Visit: `http://localhost:8000` to access the web UI
 
 ### With Docker
 ```bash
 docker build -t crypto-agent .
 docker run -p 8000:8000 crypto-agent
 ```
+Visit: `http://localhost:8000` to access the web UI
 
 ---
 
@@ -85,6 +91,7 @@ docker run -p 8000:8000 crypto-agent
 ```
 crypto-agent/
 ├── main.py           # Agent logic + FastAPI endpoints + CoinGecko tool
+├── index.html        # Web UI (chat interface)
 ├── Dockerfile        # Container setup
 ├── requirements.txt  # Dependencies
 └── README.md
